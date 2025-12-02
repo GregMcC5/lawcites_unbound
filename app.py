@@ -235,9 +235,9 @@ def convert_book(data):
                 else: #<--- if link checking turned off
                     filter_proxy = [x for x in ext_url if "proxy.uchicago" not in x]
                     if len(filter_proxy) == 1:
-                        line[6] = filter_proxy[0]
-                    elif lne(filter_proxy) > 1:
-                        line[6] = filter_proxy[0]
+                        new_line[6] = filter_proxy[0]
+                    elif len(filter_proxy) > 1:
+                        new_line[6] = filter_proxy[0]
                 
             #author data
             if line[5].lower().count("(auth)") == 1:
@@ -259,7 +259,7 @@ def convert_book(data):
             
 
             #add editors if no authors found
-            if data[0].index("author1_lname") not in range(len(new_line)) and "(Ed)" in line[5]:
+            if output_data[0].index("author1_lname") not in range(len(new_line)) and "(Ed)" in line[5]:
                 if line[5].lower().count("(ed)") == 1:
                     if "(ed)" in line[5].lower():
                         for name in line[5].split(", "):
@@ -277,10 +277,10 @@ def convert_book(data):
                         lname = val.split(" ")[1].split("(")[0].strip()
                         new_line.extend([fname, lname])
 
-            data.append(new_line)
+            output_data.append(new_line)
 
 
-    return data
+    return output_data
 
 
 def convert_chapter(data):
