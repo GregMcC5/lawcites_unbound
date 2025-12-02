@@ -314,7 +314,7 @@ uploaded_input = st.file_uploader("Upload LawCites CSV file", type='csv')
 convert = st.button("convert")
 
 if convert and uploaded_input:
-        st.success("Converting...")
+        st.toast("Converting...")
 
     
         text = uploaded_input.read().decode('utf-8')
