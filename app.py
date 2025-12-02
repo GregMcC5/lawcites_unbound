@@ -15,7 +15,7 @@ def get_include_index(data):
 
 def author_count(data):
     max = 1
-    for line in ready_data[1:]:
+    for line in data[1:]:
         author_count = line[5].lower().count("(auth)")
         if author_count > max:
             max = author_count
