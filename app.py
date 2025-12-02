@@ -47,7 +47,6 @@ def write_csv(filepath, data, headers=None, encoding='utf-8', newline=''):
             writer.writerows(data)
 
 def preprocess_data(data):
-    st.markdown("starting conver")
     #-Get File
     if not data:
         st.warning("Error", "Please select both input and output files.")
@@ -116,14 +115,7 @@ def preprocess_data(data):
                  file_name="review.csv",
                  mime="text/csv")
     
-    st.markdown("These ones are ready.")
-    #st.download_button(
-     #            label="ready",
-      #           data=list_to_csv_string(ready_file),
-      #           file_name="review.csv",
-      #           mime="text/csv")
     
-    st.success("successfully preprocessed")
     
     return ready_file
 
@@ -145,7 +137,7 @@ def isbad(url):
 #--Convert Function--
 
 def convert_book(data):
-    st.markdown("doing book!")
+    st.toast("Processing Books", icon="📚")
     if data:
         max = author_count(data)
 
@@ -294,7 +286,6 @@ def convert_book(data):
 
             output_data.append(new_line)
 
-
     return output_data
 
 
@@ -309,13 +300,10 @@ def convert_article(data):
 
 st.title('LawCites to BePress Converter')
 
-st.markdown("welcome")
-
 new_inventory_q = st.toggle("Update ChicagoUnbound Inventory file?", value=False)
 if new_inventory_q:
     uploaded_inventory = st.file_uploader("Upload Chicago Unbound CSV file", type='csv', help='Default: `inventory.csv`')
 
-# verify_links = st.checkbox("Verify Links?", value=False)
 
 material_type = st.radio(
     "Select Material Type:",
@@ -340,13 +328,14 @@ if convert and uploaded_input:
         if material_type:
             if material_type == "Book":
                 final_data = convert_book(data=preprocess_data(data))
+                st.toast("Conversion Complete", icon="✅")
             elif material_type == "Book Chapter/section":
                 final_data = convert_book(data=preprocess_data(data))
             elif material_type == "Article":
                 final_data = convert_book(data=preprocess_data(data))
                 
     
-    
+        st.badge("Success", icon=":material/check:", color="green")
         st.download_button(
                 label="Download Output XLS",
                 data=list_to_csv_string(final_data),
