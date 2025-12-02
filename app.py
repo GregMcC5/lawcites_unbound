@@ -315,7 +315,7 @@ new_inventory_q = st.toggle("Update ChicagoUnbound Inventory file?", value=False
 if new_inventory_q:
     uploaded_inventory = st.file_uploader("Upload Chicago Unbound CSV file", type='csv', help='Default: `inventory.csv`')
 
-verify_links = st.checkbox("Verify Links?", value=False)
+# verify_links = st.checkbox("Verify Links?", value=False)
 
 material_type = st.radio(
     "Select Material Type:",
