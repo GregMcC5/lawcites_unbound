@@ -50,7 +50,7 @@ def preprocess_data(data):
     st.markdown("starting conver")
     #-Get File
     if not data:
-        messagebox.showerror("Error", "Please select both input and output files.")
+        st.warning("Error", "Please select both input and output files.")
         return
 
     print("starting processing")
@@ -147,7 +147,7 @@ def isbad(url):
 def convert_book(data):
     st.markdown("doing book!")
     if data:
-        max = author_county(data)
+        max = author_count(data)
 
     #-prepping output data
     output_data = [["title", "custom_citation", "publication_date", "publisher", "book_editors", "fulltext_url", "source_fulltext_url", "catalog_url", "document_type"]]
