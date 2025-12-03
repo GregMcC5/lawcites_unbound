@@ -3,9 +3,13 @@ import requests
 from fuzzywuzzy import fuzz
 import io
 import csv
+import zipfile
 
 global uploaded_inventory
 uploaded_inventory = None
+
+global review_file
+final_review_file = None
 
 def get_include_index(data):
     # this function returns the index of the "Include On Chicago Unbound" heading, wherever it may lie in a given input file.
@@ -108,12 +112,14 @@ def preprocess_data(data):
     # output_location = "/".join([x for x in output_entry.get().split("/")][:-1] + ["review.csv"])
     # mu.write_csv(output_location, review_file)
 
-    st.markdown("The file below includes files requiring manual review.")
-    st.download_button(
-                 label="Download Review File",
-                 data=list_to_csv_string(review_file),
-                 file_name="review.csv",
-                 mime="text/csv")
+    final_review_file = review_file
+
+    # st.markdown("The file below includes files requiring manual review.")
+    # st.download_button(
+    #              label="Download Review File",
+    #              data=list_to_csv_string(review_file),
+    #              file_name="review.csv",
+    #              mime="text/csv")
     
     
     
@@ -146,7 +152,7 @@ def convert_book(data):
     for i in range(1, max + 1):
         output_data[0].extend([f"author{i}_fname", f"author{i}_lname"])
 
-    
+
     for line in data[1:]:
         if line[get_include_index(data)].lower().strip() == "true":  #true test for "include in chicago unbound"
             #normal data
@@ -333,15 +339,20 @@ if convert and uploaded_input:
                 final_data = convert_book(data=preprocess_data(data))
             elif material_type == "Article":
                 final_data = convert_book(data=preprocess_data(data))
-                
+        
+
+        zip_buffer = io.BytesIO()
+        with zipfile.ZipFile(zip_buffer, "w") as zf:
+            zf.writestr("ready.csv", list_to_csv_string(final_data))
+            zf.writestr("review.csv", list_to_csv_string(final_review_file))
+
+        zip_buffer.seek(0)
     
         st.badge("Success", icon=":material/check:", color="green")
         st.download_button(
-                label="Download Output XLS",
-                data=list_to_csv_string(final_data),
-                file_name="output.csv",
-            )
-
-
+                label="Download Output Folder",
+                data=zip_buffer,
+                file_name="output.zip",
+                mime="application/zip")
 
     
