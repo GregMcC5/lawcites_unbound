@@ -306,19 +306,29 @@ def convert_article(data):
 
 st.title('LawCites to BePress Converter')
 
-st.markdown('''
+st.markdown("""
+**This tool was developed by Gregory McCollum while at the D'Angelo Law Library at the University of Chicago.**
 
-    This tool was developed by Gregory McCollum while at the D'Angelo Law Library at the University of Chicago.
-    It is intended to help prepare scholarship data coming from the Law Cites system for batch upload to Chicago Unbound.
-    To use it first, take the following step:
-            \t1. Upload a full content inventory from Chicago Unbound below. Learn how to find it [here](https://digitalcommons.elsevier.com/reporting/content-reporting-tool). Make sure you're uploading a .CSV version of the inventory and upload it under the "Upload Chicago Unbound inventory CSV file" heading below. \n
-            \t2. Select the form of material you will be converting (books, articles, or book chapters).\n
-            \t3. Export your Law Cites reports consisting of the content oyou wish to add to Chicago Unbound. Upload it under the "Upload LawCites CSV file".
-            \t4. Click the convert button.\n
-            \t5. Once conversion is complete, click the Download Output Folder button to recieve the results in a .ZIP file. This zip file will contain 1) a "review.csv" file, which contains the entries that closely matched an existing CU item and require manual review, and 2) a "ready.xls" file which can be uploaded to the "Batch Upload Excel" menu in the Chicago Unbound "Books", "Books Sections" and "Articles" sections.\n
+It is designed to help prepare scholarship data from the Law Cites system for batch upload to Chicago Unbound. Follow these steps to use the tool:
 
-More information on the conversion coming soon.
-            ''')
+1. **Upload a full content inventory from Chicago Unbound.**  
+   - Learn how to find the inventory [here](https://digitalcommons.elsevier.com/reporting/content-reporting-tool).
+   - Make sure you upload the inventory as a `.csv` file under the **"Upload Chicago Unbound inventory CSV file"** section below.
+
+2. **Select the type of material you want to convert** (books, articles, or book chapters).
+
+3. **Export your Law Cites report** containing the materials you wish to add to Chicago Unbound.  
+   - Upload it under the **"Upload LawCites CSV file"** section.
+
+4. **Click the Convert button.**
+
+5. **After conversion is complete, click "Download Output Folder" to receive the results as a `.zip` file.**  
+   - The zip file contains:
+     - `review.csv` – entries that closely match existing Chicago Unbound items and require manual review.
+     - `ready.xls` – entries ready for batch upload to the "Batch Upload Excel" menu in the Chicago Unbound "Books," "Book Sections," or "Articles" sections.
+
+**More information on the conversion process coming soon.**
+""")
 
 uploaded_inventory = st.file_uploader("Upload Chicago Unbound inventory CSV file", type='csv', help='Default: `inventory.csv`')
 
