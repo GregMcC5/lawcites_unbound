@@ -309,7 +309,12 @@ st.title('LawCites to BePress Converter')
 st.markdown("""
 **This tool was developed by Gregory McCollum while at the D'Angelo Law Library at the University of Chicago.**
 
-It is designed to help prepare scholarship data from the Law Cites system for batch upload to Chicago Unbound. Follow these steps to use the tool:
+It is designed to help prepare scholarship data from the Law Cites system for batch upload to Chicago Unbound.""")
+            
+
+with st.expander("Show/Hide Instructions"):
+    st.markdown("""
+            Follow these steps to use the tool:
 
 1. **Upload a full content inventory from Chicago Unbound.**  
    - Learn how to find the inventory [here](https://digitalcommons.elsevier.com/reporting/content-reporting-tool).
