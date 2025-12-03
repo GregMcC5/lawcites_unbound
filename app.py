@@ -304,7 +304,7 @@ def convert_article(data):
 
 #-------------------------------------------
 
-st.title('LawCites to BePress Converter')
+st.title('LawCites to BePress Converter📚')
 
 st.markdown("""
 **This tool was developed by Gregory McCollum while at the D'Angelo Law Library at the University of Chicago.**
