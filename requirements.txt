@@ -1,3 +1,4 @@
 streamlit
 fuzzywuzzy
 pyexcel
+pyexcel-xls
