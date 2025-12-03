@@ -348,7 +348,7 @@ if convert and uploaded_input:
 
         zip_buffer = io.BytesIO()
         with zipfile.ZipFile(zip_buffer, "w") as zf:
-            zf.writestr("ready.xls", xls_buffer)
+            zf.writestr("ready.xls", xls_buffer.getvalue())
             zf.writestr("review.csv", list_to_csv_string(final_review_file))
 
         zip_buffer.seek(0)
