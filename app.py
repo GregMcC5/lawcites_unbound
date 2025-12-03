@@ -4,6 +4,7 @@ from fuzzywuzzy import fuzz
 import io
 import csv
 import zipfile
+import pyexcel
 
 global uploaded_inventory
 uploaded_inventory = None
@@ -340,10 +341,14 @@ if convert and uploaded_input:
             elif material_type == "Article":
                 final_data = convert_book(data=preprocess_data(data))
         
+        xls_buffer = io.BytesIO()
+        sheet = pyexcel.Sheet(final_data)
+        sheet.save_to_memory('xls', xls_buffer)
+        xls_buffer.seek(0)
 
         zip_buffer = io.BytesIO()
         with zipfile.ZipFile(zip_buffer, "w") as zf:
-            zf.writestr("ready.csv", list_to_csv_string(final_data))
+            zf.writestr("ready.xls", xls_buffer)
             zf.writestr("review.csv", list_to_csv_string(final_review_file))
 
         zip_buffer.seek(0)
