@@ -379,7 +379,6 @@ if convert and uploaded_input:
 
         zip_buffer.seek(0)
     
-        st.badge("Success", icon=":material/check:", color="green")
         st.download_button(
                 label="Download Output Folder",
                 data=zip_buffer,
