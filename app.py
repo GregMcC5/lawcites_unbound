@@ -9,7 +9,7 @@ global uploaded_inventory
 uploaded_inventory = None
 
 global review_file
-final_review_file = None
+final_review_file = []
 
 def get_include_index(data):
     # this function returns the index of the "Include On Chicago Unbound" heading, wherever it may lie in a given input file.
