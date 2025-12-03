@@ -69,7 +69,7 @@ def preprocess_data(data):
         inventory = [x.split(",") for x in inven_text.splitlines()]
         write_csv("inventory.csv", inventory)
     else:
-        inventory = read_csv("inventory.csv")
+        st.warning("Error", "Upload an CU inventory file.")
 
     
     #-Initial Filter
@@ -144,7 +144,6 @@ def isbad(url):
 #--Convert Function--
 
 def convert_book(data):
-    st.toast("Processing Books", icon="📚")
     if data:
         max = author_count(data)
 
@@ -307,9 +306,21 @@ def convert_article(data):
 
 st.title('LawCites to BePress Converter')
 
-new_inventory_q = st.toggle("Update ChicagoUnbound Inventory file?", value=False)
-if new_inventory_q:
-    uploaded_inventory = st.file_uploader("Upload Chicago Unbound CSV file", type='csv', help='Default: `inventory.csv`')
+st.markdown('''
+
+    This tool was developed by Gregory McCollum while at the D'Angelo Law Library at the University of Chicago.
+    It is intended to help prepare scholarship data coming from the Law Cites system for batch upload to Chicago Unbound.
+    To use it first, take the following step:
+            \t1. Upload a full content inventory from Chicago Unbound below. Learn how to find it [here](https://digitalcommons.elsevier.com/reporting/content-reporting-tool). Make sure you're uploading a .CSV version of the inventory and upload it under the "Upload Chicago Unbound inventory CSV file" heading below. \n
+            \t2. Select the form of material you will be converting (books, articles, or book chapters).\n
+            \t3. Export your Law Cites reports consisting of the content oyou wish to add to Chicago Unbound. Upload it under the "Upload LawCites CSV file".
+            \t4. Click the convert button.\n
+            \t5. Once conversion is complete, click the Download Output Folder button to recieve the results in a .ZIP file. This zip file will contain 1) a "review.csv" file, which contains the entries that closely matched an existing CU item and require manual review, and 2) a "ready.xls" file which can be uploaded to the "Batch Upload Excel" menu in the Chicago Unbound "Books", "Books Sections" and "Articles" sections.\n
+
+More information on the conversion coming soon.
+            ''')
+
+uploaded_inventory = st.file_uploader("Upload Chicago Unbound inventory CSV file", type='csv', help='Default: `inventory.csv`')
 
 
 material_type = st.radio(
