@@ -469,9 +469,9 @@ if convert and uploaded_input:
             if material_type == "Book":
                 final_data = convert_book(data=preprocess_data(data))
             elif material_type == "Book Chapter/section":
-                final_data = convert_book(data=preprocess_data(data))
+                final_data = convert_chapter(data=preprocess_data(data))
             elif material_type == "Article":
-                final_data = convert_book(data=preprocess_data(data))
+                final_data = convert_article(data=preprocess_data(data))
 
         if final_data:
             st.toast("Conversion Complete", icon="✅")
