@@ -406,12 +406,120 @@ def convert_chapter(data):
 
 
 def convert_article(data):
-    st.markdown("doing article!")
+    if data:
+        max = author_count(data)
+
+        output_data = [["title", "custom_citation", "publication_date", "", "", "fulltext_url", "source_fulltext_url", "catalog_url", "document_type", "source_publication", "volnum", "issnum"]]
+        for i in range(1, max + 1):
+            output_data[0].extend([f"author{i}_fname", f"author{i}_lname"])
+
+        
+        for line in data[1:]:
+            if line[get_include_index(data)].lower().strip() == "true":
+                #normal data
+                new_line = [
+                    line[8],
+                    line[6],
+                    line[21],
+                    "", #<--- was publishers
+                    "", #<--- was be "book-editors"
+                    "", #<--- Will be fulltext_url
+                    "", #<--- Will be source_fulltext_url
+                    f"http://pi.lib.uchicago.edu/1001/cat/bib/{line[27] if line[27] else line[26]}" if any([line[27],line[26]]) else "", #<--- Will be catalog_url
+                    "article",
+                    line[11],
+                    line[12] if line[12] else "",
+                    line[13] if line[13] else "",
+                    #line[18] if line[18] else "" #<--- will be abstract
+                    ]
+
+                #-Extract Editors
+                if "(Ed)" in line[5]:
+                    editors = [x.replace("(Ed)", "").strip() for x in line[5].split(",") if "(Ed)" in x]
+                    if len(editors) == 1:
+                        new_line[4] = editors[0]
+                    elif len(editors) > 1:
+                        new_line[4] = ", ".join(editors[:-1]) + " & " + editors[-1]
+
+                #----Link Work Begins
+                ext_url = []
+                for field in [line[25],line[29],line[31],line[23]]:
+                    if field is not None:
+                        if " " in field.strip(" "):
+                            link = field.strip(" ").split(" ")[0]
+                        else:
+                            link = field
+
+                        #-if pdf, goes to fulltext_url
+                        if ".pdf" in link.lower() and line[5] is None:
+                            new_line[5] = link
+                        else:
+                            if "http" in link:
+                                ext_url.append(link)
+
+                #if one
+                if len(ext_url) == 1:
+                    new_line[6] = ext_url[0]
+                #if multiple
+                elif len(ext_url) > 1:
+                    if len([x for x in ext_url if "doi" in x.lower()]) == 1:
+                        new_line[6] = [x for x in ext_url if "doi" in x.lower()][0]
+                    else:
+                        new_links = [x for x in ext_url if not isbad(x)]
+                        if len(new_links) == 1:
+                            new_line[6] = new_links[0]
+                        elif len(new_links) > 1:
+                            new_line[6] = new_links[0]
+                #if none
+                elif len(ext_url) == 0:
+                    new_line[6] == ""
+
+
+                #author data
+                if line[5].lower().count("(auth)") == 1:
+                    if "(ed)" in line[5].lower():
+                        for name in line[5].split(", "):
+                            if "(auth)" in name.lower():
+                                fname = name.split(" ")[0].strip()
+                                lname = name.split(" ")[1].split("(")[0].strip()
+                                new_line.extend([fname, lname])
+                    else:
+                        fname = line[5].split(" ")[0].strip()
+                        lname = line[5].split(" ")[1].split("(")[0].strip()
+                        new_line.extend([fname, lname])    
+                else:
+                    for val in [x.strip() for x in line[5].split(", ") if "(Auth)" in x]:
+                        fname = val.split(" ")[0].strip()
+                        lname = val.split(" ")[1].split("(")[0].strip()
+                        new_line.extend([fname, lname])
+
+                #add editors if no authors found
+                if output_data[0].index("author1_lname") not in range(len(new_line)) and "(Ed)" in line[5]:
+                    if line[5].lower().count("(ed)") == 1:
+                        if "(ed)" in line[5].lower():
+                            for name in line[5].split(", "):
+                                if "(ed)" in name.lower():
+                                    fname = name.split(" ")[0].strip()
+                                    lname = name.split(" ")[1].split("(")[0].strip()
+                                    new_line.extend([fname, lname])
+                        else:
+                            fname = line[5].split(" ")[0].strip()
+                            lname = line[5].split(" ")[1].split("(")[0].strip()
+                            new_line.extend([fname, lname])
+                    else:
+                        for val in [x.strip() for x in line[5].split(", ") if "(Ed)" in x]:
+                            fname = val.split(" ")[0].strip()
+                            lname = val.split(" ")[1].split("(")[0].strip()
+                            new_line.extend([fname, lname])
+
+                output_data.append(new_line)
+    return output_data
 
 
 #-------------------------------------------
 
 st.title('LawCites to BePress Converter📚')
+                            
 
 st.markdown("""
 **This tool was developed by Gregory McCollum while at the D'Angelo Law Library at the University of Chicago.**
