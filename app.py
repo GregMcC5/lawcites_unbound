@@ -6,10 +6,8 @@ import csv
 import zipfile
 import pyexcel
 
-global uploaded_inventory
-uploaded_inventory = None
 
-global review_file
+global final_review_file
 final_review_file = []
 
 def get_include_index(data):
@@ -52,6 +50,7 @@ def write_csv(filepath, data, headers=None, encoding='utf-8', newline=''):
             writer.writerows(data)
 
 def preprocess_data(data):
+    global final_review_file
     #-Get File
     if not data:
         st.warning("Error", "Please select both input and output files.")
