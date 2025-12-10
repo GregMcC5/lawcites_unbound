@@ -546,7 +546,7 @@ with st.expander("Show/Hide Instructions"):
      - `review.csv` – entries that closely match existing Chicago Unbound items and require manual review.
      - `ready.xls` – entries ready for batch upload to the "Batch Upload Excel" menu in the Chicago Unbound "Books," "Book Sections," or "Articles" sections.
 
-**More information on the conversion process coming soon.**
+More information about this tool is available [here](https://github.com/GregMcC5/lawcites_unbound).
 """)
 
 uploaded_inventory = st.file_uploader("Upload Chicago Unbound inventory CSV file", type='csv', help='Default: `inventory.csv`')
