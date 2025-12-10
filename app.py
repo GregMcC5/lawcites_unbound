@@ -225,7 +225,7 @@ def convert_book(data):
                     elif len(new_links) > 1:
                         new_line[6] = new_links[0]
             elif len(ext_url) == 0:
-                new_line[6] == ""
+                new_line[6] = ""
 
 
                 # if verify_links is True:
@@ -361,7 +361,7 @@ def convert_chapter(data):
                             new_line[6] = new_links[0]
                 #if none
                 elif len(ext_url) == 0:
-                    new_line[6] == ""
+                    new_line[6] = ""
 
                 #author data
                 if line[5].lower().count("(auth)") == 1:
@@ -471,7 +471,7 @@ def convert_article(data):
                             new_line[6] = new_links[0]
                 #if none
                 elif len(ext_url) == 0:
-                    new_line[6] == ""
+                    new_line[6] = ""
 
 
                 #author data
