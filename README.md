@@ -45,6 +45,7 @@ This app:
 
 ## Notes
 - If future edits are made to the metadata templates associated with the "articles", "books", and "book chapters" series on Chicago Unbound, changes will be necessary for this code to match those changes.
+- This app is an adadptation of a tool I developed in 2024, which ran on my local machine. Information on that tool and its development is availble [here](https://drive.google.com/file/d/1pDHLZpi3ixwtgRb9yZZmuO5q3E8fnpJB/view?usp=sharing).
 
 
 ---
