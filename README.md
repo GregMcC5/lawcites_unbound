@@ -1,7 +1,6 @@
 # LawCites to BePress Converter 📚
 
-A Streamlit web app for converting exported Law Cites scholarship data into batch-upload-ready files for [Chicago Unbound](https://chicagounbound.uchicago.edu).  
-**Developed by Gregory McCollum while at the D'Angelo Law Library, University of Chicago.**
+A Streamlit web app for converting exported Law Cites scholarship data into batch-upload-ready files for [Chicago Unbound](https://chicagounbound.uchicago.edu). **Developed by Gregory McCollum while at the D'Angelo Law Library, University of Chicago.**
 
 
 ---
