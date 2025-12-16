@@ -197,59 +197,7 @@ def convert_book(data):
             if len(ext_url) == 1:
                 new_line[6] = ext_url[0]
 
-                # if verify_links is True:
-                #     if isbad(ext_url[0]) in [True, None]:
-                #         st.warning(f"Broken link found:\n---\n{ext_url[0]}\n---\nDo you want to fix the link?")
-                #         input_url = st.text_input("Enter the new URL", ext_url[0])
-                #         if st.button("Fix Link"):
-                #             if input_url:
-                #                 new_line[6] = input_url
-                #                 st.success(f"Link updated to: {input_url}")
-                #             else:
-                #                 new_line[6] = ext_url[0]
-                #         else:
-                #             new_line[6] = ext_url[0]
-                #     else:
-                #         new_line[6] = ext_url[0]
-                # else:
-                #     new_line[6] = ext_url[0]
-                    
-            #if multiple
-            elif len(ext_url) > 1:
-                if len([x for x in ext_url if "doi" in x.lower()]) == 1:
-                    new_line[6] = [x for x in ext_url if "doi" in x.lower()][0]
-                else:
-                    new_links = [x for x in ext_url if not isbad(x)]
-                    if len(new_links) == 1:
-                        new_line[6] = new_links[0]
-                    elif len(new_links) > 1:
-                        new_line[6] = new_links[0]
-            elif len(ext_url) == 0:
-                new_line[6] = ""
 
-
-                # if verify_links is True:
-                #     new_links = [x for x in ext_url if not isbad(x)]
-                #     if len(new_links) == 1:
-                #         new_line[6] = new_links[0]
-                #     elif len(new_links) > 1:
-                #         st.warning(f"Multiple links found for {line[9]}\n---\nPlease provide a preferred link.")
-                #         input_url2 = st.text_input("Enter the new URL", new_links[0])
-                #         if st.button("Fix Link"):
-                #             if input_url2:
-                #                 new_line[6] = input_url2
-                #     elif len(new_links) == 0:
-                #         st.warning(f"No working link found for {line[9]}\n---\nPlease provide a preferred link.")
-                #         input_url3 = st.text_input("Enter the new URL")
-                #         if st.button("Fix Link"):
-                #             if input_url3:
-                #                 new_line[6] = input_url3
-                # else: #<--- if link checking turned off
-                #     filter_proxy = [x for x in ext_url if "proxy.uchicago" not in x]
-                #     if len(filter_proxy) == 1:
-                #         new_line[6] = filter_proxy[0]
-                #     elif len(filter_proxy) > 1:
-                #         new_line[6] = filter_proxy[0]
                 
             #author data
             if line[5].lower().count("(auth)") == 1:
