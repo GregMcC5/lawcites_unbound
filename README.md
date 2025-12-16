@@ -40,7 +40,7 @@ This app:
         - `ready.xls`: Entries ready for batch upload to corresponding Chicago Unbound series
         - `review.csv`: Entries that may duplicate existing inventory (manual review recommended).
 
---
+---
 
 ## Mapping Description
 For each of the entries in the submitted LawCites report the tool will
