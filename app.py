@@ -506,7 +506,7 @@ material_type = st.radio(
 )
 
 uploaded_input = st.file_uploader("Upload LawCites CSV file", type='csv')
-convert = st.button("convert")
+convert = st.button("Convert")
 
 if convert and uploaded_input:
         st.toast("Converting...")
