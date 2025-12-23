@@ -46,7 +46,7 @@ For each of the entries in the submitted LawCites report the tool will
 - Perform an initial mapping of the input data to the new format for values that can easily populate the new formatting in a one-to-one relationship (“title”, “custom_citation”, “publication_date”, “publisher”, “source_publication”).
 - Extract editor values from the input “Author(s)” field and inserting them into the new “book_editors” field (if necessary)
 - Identify each author name from the input “Author(s)” field and matching them with their corresponding “author{x}_fname” and “author{x}_lname” fields in the new data row.
-- Evaludate the provided resouece links. For each link, the script will verify to perform an HTTP request to the designated URL and verify if a valid status code is received in the request, removing those that get a 404 error or some other form of invalid code. If multiple working links still exist and work, the script will select any like that adheres to the DOI format or points to an SSRN webpage as the primary one. If multiple valid links still remain, the first provided one will be selected
+- Evaluate the provided resource links. For each link, the script will verify to perform an HTTP request to the designated URL and verify if a valid status code is received in the request, removing those that get a 404 error or some other form of invalid code. If multiple working links still exist and work, the script will select any like that adheres to the DOI format or points to an SSRN webpage as the primary one. If multiple valid links still remain, the first provided one will be selected
 - Craft a catalog link with a catalog link if a bib number is provided.
 - Add volume or issue number if provided.
 - For items that lack any authors (as is required by the Digital Commons spreadsheet), utilize any provided editors as authors for that item. The editor(s) will still appear in the “editors” field.
@@ -55,7 +55,7 @@ For each of the entries in the submitted LawCites report the tool will
 
 ## Notes
 - If future edits are made to the metadata templates associated with the "articles", "books", and "book chapters" series on Chicago Unbound, changes will be necessary for this code to match those changes.
-- This app is an adadptation of a tool I developed in 2024, which ran on my local machine. Information on that tool and its development is availble [here](https://drive.google.com/file/d/1pDHLZpi3ixwtgRb9yZZmuO5q3E8fnpJB/view?usp=sharing). Note that the pervious, local version of this tool notified the user of link conflicts in which there are not operational links or multiple operational links and prompted the user to provide one. This new, web-based verison performs its own link assessment and prioritization without prompting the user for input.
+- This app is an adaptation of a tool I developed in 2024, which ran on my local machine. Information on that tool and its development is available [here](https://drive.google.com/file/d/1pDHLZpi3ixwtgRb9yZZmuO5q3E8fnpJB/view?usp=sharing). Note that the pervious, local version of this tool notified the user of link conflicts in which there are not operational links or multiple operational links and prompted the user to provide one. This new, web-based version performs its own link assessment and prioritization without prompting the user for input.
 
 
 ---
