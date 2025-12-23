@@ -64,9 +64,16 @@ def preprocess_data(data):
     #Get_inventory
 
     if uploaded_inventory:
-        inven_text = uploaded_inventory.read().decode('utf-8')
-        inventory = [x.split(",") for x in inven_text.splitlines()]
-        write_csv("inventory.csv", inventory)
+        # inven_text = uploaded_inventory.read().decode('utf-8')
+        # inventory = [x.split(",") for x in inven_text.splitlines()]
+        # st.markdown(inventory)
+
+
+        inven_stringio = io.StringIO(uploaded_inventory.getvalue().decode("utf-8"))
+        reader = csv.reader(inven_stringio)
+        inventory = list(reader)
+
+        # write_csv("inventory.csv", inventory)
     else:
         st.warning("Error", "Upload an CU inventory file.")
 
